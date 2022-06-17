@@ -1,0 +1,21 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  background: var(--color-primary);
+}
+
+.header_logo {
+  margin-left: 2rem;
+  color: var(--color-bg);
+}
+
+.nav_links {
+  margin-right: 2rem;
+}
+
+.nav_links>a {
+  padding-left: 2rem;
+  color: var(--color-bg);
+}
