@@ -4,10 +4,13 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react'
 import Comments from '../comments/Comments';
 import Item from '../Item';
+import {GrFavorite} from 'react-icons/gr';
+import { GiShoppingCart } from 'react-icons/gi'
 
 const Home = (props) => {
   const { user, isAuthenticated } = useAuth0();
   const [products, setProducts] = useState([]);
+  // const [userProducts, setUserProducts] = useState([]);
 
   if (isAuthenticated) {
     axios.get("https://online-shop-ya.herokuapp.com/users")
@@ -17,27 +20,45 @@ const Home = (props) => {
       }).catch(error => console.log(error.message))
   }
 
-
   useEffect(() => {
+    axios.get("https://online-shop-ya.herokuapp.com/products")
+      .then(response =>
+        setProducts(response.data)
+      ).catch(error => console.log(error.message))
+
+  }, [])
+
+  // useEffect(() => {
+  //   axios.get("https://online-shop-ya.herokuapp.com/data")
+  //     .then((response) => {
+  //       const products = [];
+  //       response.data.forEach(item => item.addedProducts.map(item => products.push(item)));
+  //       console.log(response.data);
+  //       setProducts(products);
+
+  //       const userItems = [];
+  //       response.data.forEach((item) => {
+  //         if (item.email === user.email) {
+  //           item.addedProducts.map(item => userItems.push(item))
+  //         }
+  //       });
+  //       setUserProducts(userItems);
+  //     }).catch(error => console.log(error.message))
+
+  // }, [])
+
+  if (isAuthenticated) {
+    const cartItems = [];
     axios.get("https://online-shop-ya.herokuapp.com/data")
-      .then((response) => {
-        const products=[];
-        response.data.forEach(item => item.addedProducts.map(item => products.push(item)));
-        console.log(response.data);
-        setProducts(products);
+      .then(response => response.data.forEach((item) => {
+        if (item.email === user.email) {
+          item.cartList.map(item => cartItems.push(item))
+        }
+      }));
+    console.log(cartItems.length);
+    props.changeCount(cartItems.length);
+  }
 
-        
-        const cartItems=[];
-        response.data.forEach((item) => {if(item.email===user.email){
-          item.cartList.map(item => cartItems.push(item))}
-         });  
-        console.log(cartItems.length);
-        props.changeCount(cartItems.length);
-        
-
-      })
-      .catch(error => console.log(error.message))
-  }, [props, user.email])
 
   const createNewUser = (response) => {
     if (!response.data.some(item => item === user.email)) {
@@ -88,7 +109,7 @@ const Home = (props) => {
         console.log(res.data);
         setCount(res.data.length);
         props.changeCount(res.data.cartList.length);
-    
+
       })
       .catch(error => console.log(error));
   }
@@ -122,28 +143,35 @@ const Home = (props) => {
         {products.map((element, index) => {
           return (<Col key={index}>
 
-            <Card style={{ width: '18rem', height: '50rem', overflow: "scroll" }}>
+            <Card style={{ width: '18rem', height: '30rem', marginTop: '2rem' }}>
               <Card.Img variant="top" src={element.image}
-                style={{ width: '15rem', height: '15rem' }}
+                style={{ width: '17rem', height: '15rem' ,margin:'auto'}}
                 onClick={() => modalSetting(element)} />
-              <Card.Body>
+              <Card.Body style={{ height: '7rem', overflow: "scroll" }}>
                 <Card.Title>{element.title}</Card.Title>
-                <Card.Text style={{ height: '7rem', overflow: "scroll" }}>
+                <Card.Text >
                   {element.description}
                 </Card.Text>
-                <Card.Text>
-                  {element.price}$
-                </Card.Text>
-                {isAuthenticated && <Button variant="primary" onClick={(e) => addToFav(e, element)}>Add to Favorite</Button>}
-                {isAuthenticated && <Button variant="primary" onClick={(e) => addToCart(e, element)}>Add to Cart</Button>}
-                <Button variant="primary" onClick={() => modalShowSetting(element)}>
-                  comments
-                </Button>
-
-
-
+             
 
               </Card.Body>
+              <Card.Footer>
+             
+                <div style={{display:'flex',justifyContent:'space-between'}}>
+                {isAuthenticated && <Button variant="primary" onClick={(e) => addToFav(e, element)}><GrFavorite /></Button>}
+                <Card.Text style={{margin:'auto'}}>
+                  {element.price}$
+                </Card.Text>
+                {isAuthenticated && <Button variant="primary" onClick={(e) => addToCart(e, element)}><GiShoppingCart /></Button>}
+                </div>
+                <Button style={{marginTop:'2rem'}} variant="success" onClick={() => modalShowSetting(element)}>
+                  comments
+                </Button>
+                {/* {(userProducts.some(item=>item.id===element.id))&&
+                isAuthenticated && <Button variant="primary" >Remove</Button>
+                } */}
+              </Card.Footer>
+
             </Card>
           </Col>
           )

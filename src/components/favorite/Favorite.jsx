@@ -23,7 +23,7 @@ const Favorite = () => {
 
   
 
-    const removeFromCart=(element)=>{
+    const removeFromFav=(element)=>{
       axios.delete(`https://online-shop-ya.herokuapp.com/favList/${user.email}/${element.id}`)
       .then((res) => {
         console.log(res.data.favoriteList);
@@ -38,20 +38,16 @@ const Favorite = () => {
         {favoriteList.map((element, index) => {
           return (<Col key={index}>
 
-            <Card style={{ width: '18rem', height: '50rem', overflow: "scroll" }}>
+            <Card style={{ width: '18rem', height: '30rem', marginTop: '2rem' }}>
               <Card.Img variant="top" src={element.image}
-                style={{ width: '15rem', height: '15rem' }}
+                style={{ width: '17rem', height: '15rem' ,margin:'auto'}}
                 onClick={() => setModalShow(true)} />
-              <Card.Body>
+              <Card.Body style={{ height: '7rem', overflow: "scroll" }}>
                 <Card.Title>{element.title}</Card.Title>
-                <Card.Text style={{ height: '7rem', overflow: "scroll" }}>
+                <Card.Text >
                   {element.description}
                 </Card.Text>
-                <Card.Text>
-                  {element.price}$
-                </Card.Text>
-                <Button variant="danger" onClick={()=>removeFromCart(element)}>remove</Button>
-
+            
                 <Item
                   show={modalShow}
                   onHide={() => setModalShow(false)}
@@ -59,6 +55,14 @@ const Favorite = () => {
                   title={element.title}
                 />
               </Card.Body>
+              <Card.Footer>
+              
+                <Card.Text style={{margin:'auto'}}>
+                  {element.price}$
+                </Card.Text>
+                <Button variant="danger" onClick={()=>removeFromFav(element)}>remove</Button>
+              
+              </Card.Footer>
             </Card>
           </Col>
           )

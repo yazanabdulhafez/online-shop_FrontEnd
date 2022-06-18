@@ -16,6 +16,7 @@ import {
 import { withAuth0 } from '@auth0/auth0-react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from 'react';
+import MyItems from './components/myItems/MyItems';
 
 function App() {
 
@@ -34,9 +35,9 @@ const[count,setCount]=useState(0);
           <Route exact path='/favorite' element={isAuthenticated&&<Favorite />} />
           <Route exact path='/comments' element={<Comments />} />
           <Route exact path='/cart' element={isAuthenticated&&<Cart changeCount={count=>setCount(count)} />} />
+          <Route exact path='/myItems' element={isAuthenticated&&<MyItems />} />
           <Route exact path='/profile' element={isAuthenticated&&<Profile />} />
-
-
+        
         </  Routes>
 
         <Footer />
