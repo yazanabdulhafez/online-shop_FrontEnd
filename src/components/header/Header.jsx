@@ -1,11 +1,11 @@
-import React from 'react'
-import './Header.css'
-import { GiShoppingCart } from 'react-icons/gi'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import './Header.css';
+import { GiShoppingCart } from 'react-icons/gi';
+import { Link } from 'react-router-dom';
 import { withAuth0 } from '@auth0/auth0-react';
-import LoginButton from '../LoginButton'
-import LogoutButton from '../LogoutButton'
-import { useAuth0 } from '@auth0/auth0-react'
+import LoginButton from '../LoginButton';
+import LogoutButton from '../LogoutButton';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 const Header = (props) => {
@@ -20,7 +20,8 @@ const Header = (props) => {
       <nav className='nav_links'>
         <Link style={{ textDecoration: 'none',marginLeft:'10px' }} to="/">Home</Link>
         {isAuthenticated&&<Link style={{ textDecoration: 'none' }} to="/favorite">Favorite</Link>}
-        {isAuthenticated&&<Link style={{ textDecoration: 'none' }} to="/cart"><GiShoppingCart />{props.count}</Link>}
+        {isAuthenticated&&<Link style={{ textDecoration: 'none' }} to="/cart"><GiShoppingCart /></Link>}
+        {isAuthenticated&&<Link style={{ textDecoration: 'none' }} to="/myItems">MyItems</Link>}
         {isAuthenticated&&<Link style={{ textDecoration: 'none' }} to="/profile">Profile</Link>}
         {
           isAuthenticated ?

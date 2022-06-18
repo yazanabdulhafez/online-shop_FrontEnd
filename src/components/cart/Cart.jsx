@@ -40,20 +40,15 @@ const Cart = (props) => {
         {cartList.map((element, index) => {
           return (<Col key={index}>
 
-            <Card style={{ width: '18rem', height: '50rem', overflow: "scroll" }}>
+            <Card style={{ width: '18rem', height: '30rem', marginTop: '2rem' }}>
               <Card.Img variant="top" src={element.image}
-                style={{ width: '15rem', height: '15rem' }}
+                style={{ width: '17rem', height: '15rem' ,margin:'auto'}}
                 onClick={() => setModalShow(true)} />
-              <Card.Body>
+              <Card.Body style={{ height: '7rem', overflow: "scroll" }}>
                 <Card.Title>{element.title}</Card.Title>
-                <Card.Text style={{ height: '7rem', overflow: "scroll" }}>
+                <Card.Text >
                   {element.description}
                 </Card.Text>
-                <Card.Text>
-                  {element.price}$
-                </Card.Text>
-                <Button variant="danger" onClick={()=>removeFromCart(element)}>remove</Button>
-
                 <Item
                   show={modalShow}
                   onHide={() => setModalShow(false)}
@@ -61,6 +56,13 @@ const Cart = (props) => {
                   title={element.title}
                 />
               </Card.Body>
+              <Card.Footer>
+              <Card.Text style={{margin:'auto'}}>
+                  {element.price}$
+                </Card.Text>
+                <Button variant="danger" onClick={()=>removeFromCart(element)}>remove</Button>
+              
+              </Card.Footer>
             </Card>
           </Col>
           )
