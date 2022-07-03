@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import { Button, Form, Modal } from 'react-bootstrap'
 
 const AddForm = (props) => {
   return (
@@ -17,46 +17,51 @@ const AddForm = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <form onSubmit={(e) => props.addItem(e)}>
+          <Form onSubmit={(e) => props.addItem(e)}>
 
-<fieldset>
-  <label style={{ marginLeft: "20px", marginRight: "5px" }}>Id</label>
-  <input defaultValue={"Id"} onChange={(e) => props.id(e)} type="number" />
+            <fieldset>
 
-  <label style={{ marginLeft: "20px", marginRight: "5px" }}>Title</label>
-  <input defaultValue={"Title"} onChange={(e) => props.title(e)} type="text" />
+              <Form.Group className="mb-3" controlId="formBasicID">
+                <Form.Label>Id</Form.Label>
+                <Form.Control type="number" placeholder="Enter ID" onChange={(e) => props.id(e)} />
 
-  <label style={{ marginLeft: "20px", marginRight: "5px" }}>Price</label>
-  <input defaultValue={"Price"} 
-    onChange={(e) => props.price(e)}
-    type="number"
-  />
+              </Form.Group>
 
-  <label style={{ marginLeft: "20px", marginRight: "5px" }}>Description</label>
-  <input defaultValue={"Description"} 
-    onChange={(e) => props.description(e)}
-    type="text"
-  />
+              <Form.Group className="mb-3" controlId="formBasicTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control type="text" placeholder="Enter Title" onChange={(e) => props.title(e)} />
 
-  <label style={{ marginLeft: "20px", marginRight: "5px" }}>Category</label>
-  <input defaultValue={"Category"} 
-    onChange={(e) =>props.category(e)}
-    type="text"
-  /> 
-  
-  <label style={{ marginLeft: "20px", marginRight: "5px" }}>Image</label>
-  <input defaultValue={"Image"} 
-    onChange={(e) =>props.image(e)}
-    type="text"
-  />
-  <input
-    type="submit"
-    value="Add Item"
-    style={{ marginLeft: "20px", backgroundColor: "#5E8B7E", color: "white", border: "none" }}
-  />
+              </Form.Group>
 
-</fieldset>
-</form>
+              <Form.Group className="mb-3" controlId="formBasicPrice">
+                <Form.Label>Price</Form.Label>
+                <Form.Control type="number" placeholder="Enter Price" onChange={(e) => props.price(e)} />
+
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control as="textarea" rows={3} placeholder="Enter Description" onChange={(e) => props.description(e)} />
+
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicCategory">
+                <Form.Label>Category</Form.Label>
+                <Form.Control type="text" placeholder="Enter Category" onChange={(e) => props.category(e)} />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicImage">
+                <Form.Label>Image</Form.Label>
+                <Form.Control type="text" placeholder="Enter Image Source" onChange={(e) => props.image(e)} />
+
+              </Form.Group>
+
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+
+            </fieldset>
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={props.onHide}>Close</Button>

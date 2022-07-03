@@ -1,34 +1,73 @@
-import React from 'react'
+import React from 'react';
+import { Button, Form, Modal } from 'react-bootstrap';
 
-const UpdateForm = () => {
+const UpdateForm = (props) => {
   return (
     <div>
-      <form onSubmit={(e) => this.props.update(e)}>
-          <fieldset>
-            <label style={{ marginLeft: "20px", marginRight: "5px" }}>Name of the Book</label>
-            <input defaultValue={this.props.books.name} onChange={(e) => this.props.updateBookName(e)} type="text" />
 
-            <label style={{ marginLeft: "20px", marginRight: "5px" }}>Description of the Book</label>
-            <input
-              defaultValue={this.props.books.description}
-              onChange={(e) => this.props.updateDiscOfBook(e)}
-              type="text"
-            />
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            {props.title}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={(e) => props.updateItem(e)}>
 
-            <label style={{ marginLeft: "20px", marginRight: "5px" }}>Status of the Book</label>
-            <input
-              defaultValue={this.props.books.status}
-              onChange={(e) => this.props.updateStatusOfBook(e)}
-              type="text"
-            />
+            <fieldset>
 
-            <input
-              type="submit"
-              value="Update Book"
-              style={{ marginLeft: "20px", backgroundColor: "#5E8B7E", color: "white", border: "none" }}
-            />
-          </fieldset>
-        </form>
+              <Form.Group className="mb-3" controlId="formBasicID">
+                <Form.Label>Id</Form.Label>
+                <Form.Control type="number" placeholder={props.element.id} onChange={(e) => props.id(e)} />
+
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control type="text" placeholder={props.element.title} onChange={(e) => props.title(e)} />
+
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicPrice">
+                <Form.Label>Price</Form.Label>
+                <Form.Control type="number" placeholder={props.element.price} onChange={(e) => props.price(e)} />
+
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control as="textarea" rows={3} placeholder={props.element.description} onChange={(e) => props.description(e)} />
+
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicCategory">
+                <Form.Label>Category</Form.Label>
+                <Form.Control type="text" placeholder={props.element.category} onChange={(e) => props.category(e)} />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicImage">
+                <Form.Label>Image</Form.Label>
+                <Form.Control type="text" placeholder={props.element.image} onChange={(e) => props.image(e)} />
+
+              </Form.Group>
+
+              <Button variant="primary" type="submit" onClick={props.onHide}>
+                Submit
+              </Button>
+
+            </fieldset>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+
     </div>
   )
 }
