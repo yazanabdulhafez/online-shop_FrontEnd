@@ -109,6 +109,13 @@ a:hover {
   color: var(--color-bg);
 }
 
+.add_btn {
+  float: right;
+  z-index: 2;
+  opacity: 0.7;
+  cursor: crosshair;
+}
+
 img {
   display: block;
   width: 100%;
