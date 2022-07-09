@@ -24,14 +24,17 @@ const Header = (props) => {
 
           <Nav >
             <Nav.Link><Link className="navBar_link" to="/">Home</Link></Nav.Link>
-            {isAuthenticated && <Nav.Link><Link className="navBar_link" to="/favorite">Favorite</Link></Nav.Link>}
+            {isAuthenticated && <Nav.Link><Link className="navBar_link" to="/favorite">Favorite{" "}
+            <Badge  bg="danger" badgeContent={1}>{1}</Badge></Link></Nav.Link>}
             {isAuthenticated && <Nav.Link><Link className="navBar_link" to="/cart">
               
-              <GiShoppingCart />
+              <GiShoppingCart />{" "}
               <Badge color="secondary" badgeContent={1}>{1}</Badge>
               
             </Link></Nav.Link>}
-            {isAuthenticated && <Nav.Link><Link className="navBar_link" to="/myItems">MyItems</Link></Nav.Link>}
+            {isAuthenticated && <Nav.Link><Link className="navBar_link" to="/myItems">MyItems{" "}
+            <Badge  bg="warning" badgeContent={1}>{1}</Badge>
+            </Link></Nav.Link>}
             {isAuthenticated && <Nav.Link><Link className="navBar_link" to="/profile">Profile</Link></Nav.Link>}
             </Nav>
 
