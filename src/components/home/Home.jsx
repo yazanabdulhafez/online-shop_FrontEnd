@@ -10,6 +10,8 @@ import { GiShoppingCart } from 'react-icons/gi'
 const Home = (props) => {
   const { user, isAuthenticated } = useAuth0();
   const [products, setProducts] = useState([]);
+  // const[addedToCart,setAddedToCart]=useState(false);
+  // const[addedToFavorite,setAddedToFavorite]=useState(false);
   // const [userProducts, setUserProducts] = useState([]);
 
   if (isAuthenticated) {
@@ -116,6 +118,7 @@ const Home = (props) => {
 
   const addToFav = (e, element) => {
     e.preventDefault();
+
     const dataBody = {
       email: user.email,
       id: element.id,

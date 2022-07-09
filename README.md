@@ -2,6 +2,8 @@
 
 It's an online shopping web application
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/31dfe529-f74c-4f2d-a839-3661e1292d63/deploy-status)](https://app.netlify.com/sites/online-shop-ya/deploys)
+
 ## users can do the following
 
 1. Signup and login.

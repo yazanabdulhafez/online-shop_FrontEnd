@@ -6,31 +6,49 @@ import { withAuth0 } from '@auth0/auth0-react';
 import LoginButton from '../LoginButton';
 import LogoutButton from '../LogoutButton';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Badge, Container, Nav, Navbar } from 'react-bootstrap';
 
 
 const Header = (props) => {
-  const {isAuthenticated} = useAuth0();
+  const { isAuthenticated } = useAuth0();
   console.log(isAuthenticated);
   return (
-    <header>
+    <Navbar collapseOnSelect expand="lg" variant="dark" className='nav_bar'>
+      <Container className="navbar_container">
+        <div>
+        <Navbar.Brand href="/" >Online Shop</Navbar.Brand>
+        </div>
+        <div>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
 
+          <Nav >
+            <Nav.Link><Link className="navBar_link" to="/">Home</Link></Nav.Link>
+            {isAuthenticated && <Nav.Link><Link className="navBar_link" to="/favorite">Favorite</Link></Nav.Link>}
+            {isAuthenticated && <Nav.Link><Link className="navBar_link" to="/cart">
+              
+              <GiShoppingCart />
+              <Badge color="secondary" badgeContent={1}>{1}</Badge>
+              
+            </Link></Nav.Link>}
+            {isAuthenticated && <Nav.Link><Link className="navBar_link" to="/myItems">MyItems</Link></Nav.Link>}
+            {isAuthenticated && <Nav.Link><Link className="navBar_link" to="/profile">Profile</Link></Nav.Link>}
+            </Nav>
 
-      <a href="#f" className='header_logo'>Online Shop</a>
+            <Nav>
+            {
+              isAuthenticated ?
+                <LogoutButton /> :
+                <LoginButton />
+            }
+            </Nav>
 
-      <nav className='nav_links'>
-        <Link style={{ textDecoration: 'none',marginLeft:'10px' }} to="/">Home</Link>
-        {isAuthenticated&&<Link style={{ textDecoration: 'none' }} to="/favorite">Favorite</Link>}
-        {isAuthenticated&&<Link style={{ textDecoration: 'none' }} to="/cart"><GiShoppingCart /></Link>}
-        {isAuthenticated&&<Link style={{ textDecoration: 'none' }} to="/myItems">MyItems</Link>}
-        {isAuthenticated&&<Link style={{ textDecoration: 'none' }} to="/profile">Profile</Link>}
-        {
-          isAuthenticated ?
-            <LogoutButton /> :
-            <LoginButton />
-        }
-      </nav>
+        
+        </Navbar.Collapse>
+        </div>
+      </Container>
+    </Navbar>
 
-    </header>
   )
 }
 
